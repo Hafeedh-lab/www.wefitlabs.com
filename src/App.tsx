@@ -1,6 +1,13 @@
 import React from 'react';
 import { Navigation } from './components/Navigation';
 import { HeroSection } from './components/HeroSection';
+import { MarketTractionSection } from './components/MarketTractionSection';
+import { BusinessModelSection } from './components/BusinessModelSection';
+import { InvestmentHighlightsSection } from './components/InvestmentHighlightsSection';
+import { TeamSection } from './components/TeamSection';
+import { FinancialsSection } from './components/FinancialsSection';
+import { InvestorResourcesSection } from './components/InvestorResourcesSection';
+import { SocialProofSection } from './components/SocialProofSection';
 import { DiscordSection } from './components/DiscordSection';
 import { FeaturesSection } from './components/FeaturesSection';
 import { TrackingSection } from './components/TrackingSection';
@@ -20,6 +27,13 @@ function App() {
         <div className="relative content-center items-center bg-black box-border caret-transparent gap-x-0 flex flex-col h-min justify-start min-h-[1000px] gap-y-0">
           <Navigation />
           <HeroSection />
+          <MarketTractionSection />
+          <BusinessModelSection />
+          <InvestmentHighlightsSection />
+          <TeamSection />
+          <FinancialsSection />
+          <InvestorResourcesSection />
+          <SocialProofSection />
           <DiscordSection />
           <FeaturesSection />
           <TrackingSection />

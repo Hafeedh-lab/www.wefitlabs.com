@@ -1,74 +1,93 @@
 import React from 'react';
+import { trackCTA } from '../utils/analytics';
 
 export function HeroSection() {
   return (
-    <header className="relative content-center items-center bg-[linear-gradient(231deg,rgb(6,48,29)_0%,rgb(0,0,0)_26%)] box-border caret-transparent gap-x-10 flex flex-col shrink-0 h-min justify-center gap-y-10 w-full pt-[140px] pb-[45px] px-0 md:flex-row md:pt-[150px] md:pb-[50px] md:px-[30px]">
-      <div className="relative aspect-[0.5625_/_1] box-border caret-transparent shrink-0 h-[800px] order-1 w-auto md:h-auto md:order-none md:w-[422px]">
-        <video 
-          src="https://framerusercontent.com/assets/gOt5QbbnrE4m0husE6UtM4ppzs.mp4" 
-          loop 
-          preload="auto" 
-          muted 
-          playsInline 
-          autoPlay 
-          className="box-border caret-transparent h-full object-cover w-full"
-        />
-      </div>
-      <div className="relative content-center items-center box-border caret-transparent gap-x-[30px] flex flex-col shrink-0 h-min justify-start gap-y-[30px] w-full overflow-hidden px-[15px] md:content-start md:items-start md:w-min md:px-0">
-        <div className="relative content-center items-center self-auto box-border caret-transparent gap-x-2.5 flex flex-col shrink-0 h-min justify-center gap-y-2.5 w-full overflow-hidden md:self-stretch md:w-auto">
-          <div className="box-content caret-black block md:aspect-auto md:box-border md:caret-transparent md:contents md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto]">
-            <div className="static box-content caret-black block flex-row shrink justify-normal min-h-0 min-w-0 w-auto break-normal z-auto md:relative md:aspect-auto md:box-border md:caret-transparent md:flex md:flex-col md:shrink-0 md:justify-start md:min-h-[auto] md:min-w-[auto] md:break-words md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:w-full md:z-[1] md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto]">
-              <h1 className="text-black text-[32px] font-bold box-content caret-black leading-[normal] min-h-0 min-w-0 text-start break-normal font-times md:text-white md:text-6xl md:font-medium md:aspect-auto md:box-border md:caret-transparent md:leading-[78px] md:min-h-[auto] md:min-w-[auto] md:break-words md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:text-left md:decoration-auto md:underline-offset-auto md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto] md:font-unbounded">
-                <strong className="font-bold box-content caret-black break-normal md:aspect-auto md:box-border md:caret-transparent md:break-words md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto]">Track, Compete</strong>
-                <strong className="font-bold box-content caret-black break-normal md:aspect-auto md:box-border md:caret-transparent md:break-words md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto]">
-                  <br className="md:aspect-auto md:box-border md:caret-transparent md:break-words md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto]" />
-                </strong>
-                <strong className="font-bold box-content caret-black break-normal md:aspect-auto md:box-border md:caret-transparent md:break-words md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto]">& Achieve</strong>
-              </h1>
+    <header
+      id="home"
+      className="relative flex min-h-[680px] w-full flex-col justify-center overflow-hidden bg-[linear-gradient(231deg,#06301d_0%,#000_26%)] text-white"
+    >
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(65,184,131,0.25),transparent_55%)]" />
+      <div className="relative z-10 mx-auto grid w-full max-w-6xl gap-12 px-6 py-24 md:grid-cols-[1.1fr_1fr] md:px-12 lg:px-16">
+        <div className="flex flex-col gap-8">
+          <div className="space-y-4">
+            <span className="font-unbounded text-sm uppercase tracking-[0.4em] text-emerald-400">Investor Preview</span>
+            <h1 className="font-unbounded text-4xl leading-tight md:text-6xl">
+              $96B social fitness market. 400M+ app users. WeFit is the acquisition-ready platform connecting them.
+            </h1>
+            <p className="font-poppins text-base text-zinc-200 md:text-lg">
+              With 10K+ early adopters and an 89% retention rate, WeFit transforms the fitness economy into a competitive social
+              network. Our technology powers high frequency engagement, premium monetization, and strategic distribution channels.
+            </p>
+          </div>
+
+          <div className="grid gap-4 text-sm font-unbounded uppercase tracking-[0.3em] text-emerald-400 md:grid-cols-2">
+            <div className="rounded-3xl border border-emerald-500/50 bg-black/60 p-4">
+              <p className="text-xs text-zinc-500">Market Opportunity</p>
+              <p className="mt-2 text-2xl text-white">$96B TAM</p>
+              <p className="text-xs text-zinc-400">400M+ global app users seeking social experiences</p>
+            </div>
+            <div className="rounded-3xl border border-emerald-500/50 bg-black/60 p-4">
+              <p className="text-xs text-zinc-500">Traction Snapshot</p>
+              <p className="mt-2 text-2xl text-white">10K Early Adopters</p>
+              <p className="text-xs text-zinc-400">89% retention, 2.7 sessions per user/day</p>
             </div>
           </div>
-          <div className="box-content caret-black block md:aspect-auto md:box-border md:caret-transparent md:contents md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto]">
-            <div className="static box-content caret-black block flex-row shrink justify-normal max-w-none min-h-0 min-w-0 w-auto break-normal z-auto md:relative md:aspect-auto md:box-border md:caret-transparent md:flex md:flex-col md:shrink-0 md:justify-start md:max-w-full md:min-h-[auto] md:min-w-[auto] md:break-words md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:w-full md:z-[1] md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto]">
-              <p className="text-black text-base box-content caret-black leading-[normal] min-h-0 min-w-0 text-start break-normal font-times md:text-white md:text-lg md:aspect-auto md:box-border md:caret-transparent md:leading-[27px] md:min-h-[auto] md:min-w-[auto] md:break-words md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:text-left md:decoration-auto md:underline-offset-auto md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto] md:font-poppins">Join challenges, compete with friends, and</p>
-              <p className="text-black text-base box-content caret-black leading-[normal] min-h-0 min-w-0 text-start break-normal font-times md:text-white md:text-lg md:aspect-auto md:box-border md:caret-transparent md:leading-[27px] md:min-h-[auto] md:min-w-[auto] md:break-words md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:text-left md:decoration-auto md:underline-offset-auto md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto] md:font-poppins">achieve your fitness goals with WeFit.</p>
-            </div>
+
+          <div className="flex flex-wrap gap-4">
+            <button
+              onClick={() => {
+                trackCTA('download_pitch_deck', { surface: 'hero_primary_cta' });
+                window.open('#download/pitch-deck', '_blank');
+              }}
+              className="inline-flex items-center justify-center rounded-full bg-emerald-500 px-8 py-3 font-unbounded text-sm uppercase tracking-[0.3em] text-black transition hover:bg-emerald-400"
+            >
+              Download Pitch Deck
+            </button>
+            <button
+              onClick={() => {
+                trackCTA('schedule_demo', { surface: 'hero_secondary_cta' });
+                window.open('https://cal.com/wefit/investor-demo', '_blank');
+              }}
+              className="inline-flex items-center justify-center rounded-full border border-emerald-500 px-8 py-3 font-unbounded text-sm uppercase tracking-[0.3em] text-emerald-300 transition hover:bg-emerald-500/10"
+            >
+              Schedule Demo
+            </button>
           </div>
         </div>
-        <div className="relative content-center items-center box-border caret-transparent gap-x-2.5 flex shrink-0 h-min justify-center order-1 gap-y-2.5 w-full md:justify-start md:order-none md:w-min">
-          <div className="relative box-border caret-transparent basis-0 grow-[0.9] shrink-0 w-px md:basis-auto md:grow-0 md:w-[400px]">
-            <div className="box-content caret-black block md:aspect-auto md:box-border md:caret-transparent md:contents md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto]">
-              <div className="static [align-items:normal] box-content caret-black block h-auto justify-normal w-auto md:relative md:items-center md:aspect-auto md:box-border md:caret-transparent md:flex md:h-full md:justify-center md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:w-full md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto]">
-                <form className="static box-content caret-black gap-x-[normal] block min-h-0 min-w-0 gap-y-[normal] w-auto md:relative md:aspect-auto md:box-border md:caret-transparent md:gap-x-0 md:flex md:min-h-[auto] md:min-w-[auto] md:overscroll-x-auto md:overscroll-y-auto md:gap-y-0 md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:w-full md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto]">
-                  <input 
-                    type="email" 
-                    name="email" 
-                    placeholder="Your email" 
-                    defaultValue="" 
-                    className="text-black text-[13.3333px] bg-white shadow-none box-content caret-black inline-block leading-[normal] min-h-0 min-w-0 w-auto px-0.5 py-px rounded-none font-arial md:appearance-none md:text-white md:text-[15px] md:aspect-auto md:bg-neutral-800 md:shadow-[rgb(65,185,131)_0px_0px_0px_0px_inset] md:box-border md:caret-transparent md:block md:leading-[18px] md:min-h-[auto] md:min-w-[auto] md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:w-full md:[mask-position:0%] md:bg-left-top md:pl-[15px] md:pr-[165px] md:py-[15px] md:scroll-m-0 md:scroll-p-[auto] md:rounded-[100px] md:font-unbounded" 
-                  />
-                  <div className="static box-content caret-black right-auto inset-y-auto md:absolute md:aspect-auto md:box-border md:caret-transparent md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto] md:right-1 md:inset-y-1">
-                    <input 
-                      type="submit" 
-                      value="Join Waitlist" 
-                      className="text-[13.3333px] font-normal bg-white box-content caret-black h-auto leading-[normal] text-start text-wrap w-auto z-auto px-0.5 py-px rounded-none font-arial md:appearance-none md:text-sm md:font-semibold md:aspect-auto md:bg-emerald-400 md:box-border md:caret-transparent md:h-full md:leading-[14px] md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:text-center md:decoration-auto md:underline-offset-auto md:text-nowrap md:w-[150px] md:z-[1] md:[mask-position:0%] md:bg-left-top md:px-3 md:py-0 md:scroll-m-0 md:scroll-p-[auto] md:rounded-[96px] md:font-unbounded" 
-                    />
-                  </div>
-                </form>
+
+        <div className="relative flex flex-col justify-end">
+          <div className="relative overflow-hidden rounded-3xl border border-emerald-900/70 bg-black/60 shadow-[0_0_60px_rgba(16,185,129,0.2)]">
+            <video
+              src="https://framerusercontent.com/assets/gOt5QbbnrE4m0husE6UtM4ppzs.mp4"
+              loop
+              preload="auto"
+              muted
+              playsInline
+              autoPlay
+              className="h-full w-full object-cover"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 flex flex-col gap-3 p-6">
+              <div className="flex items-center justify-between text-xs font-unbounded uppercase tracking-[0.3em] text-emerald-300">
+                <span>Investor-grade telemetry</span>
+                <span>Realtime feed</span>
+              </div>
+              <div className="grid gap-3 md:grid-cols-2">
+                <div className="rounded-2xl border border-emerald-900/60 bg-black/70 p-3">
+                  <p className="font-unbounded text-sm text-white">MAU Growth</p>
+                  <p className="font-poppins text-xs text-zinc-300">+34% QoQ with low acquisition spend</p>
+                </div>
+                <div className="rounded-2xl border border-emerald-900/60 bg-black/70 p-3">
+                  <p className="font-unbounded text-sm text-white">Retention</p>
+                  <p className="font-poppins text-xs text-zinc-300">89% at week 12 driven by social loops</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="box-content caret-black block md:aspect-auto md:box-border md:caret-transparent md:contents md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto]">
-          <a href="https://apps.apple.com/us/app/wefit-early-access/id6740943229" className="static text-black box-content caret-black inline shrink min-h-0 min-w-0 w-auto md:relative md:text-blue-700 md:aspect-[3.37731_/_1] md:box-border md:caret-transparent md:block md:shrink-0 md:min-h-[auto] md:min-w-[auto] md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:w-[169px] md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto]">
-            <div className="static box-content caret-black inset-auto md:absolute md:aspect-auto md:box-border md:caret-transparent md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto] md:inset-0">
-              <img 
-                sizes="168.8654px" 
-                src="https://c.animaapp.com/mfqo4zaxsuDsQ0/assets/HPCoHevAWuPPmpiXyU5SlPhy2A.png" 
-                alt="" 
-                className="box-content caret-black h-auto object-fill align-middle w-auto md:aspect-[auto_1280_/_379] md:box-border md:caret-transparent md:h-full md:object-cover md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:align-baseline md:w-full md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto]" 
-              />
-            </div>
-          </a>
+          <p className="mt-6 font-poppins text-sm text-zinc-400">
+            Analytics instrumentation is live. Request access to the data room for raw dashboards and cohort exports.
+          </p>
         </div>
       </div>
     </header>
