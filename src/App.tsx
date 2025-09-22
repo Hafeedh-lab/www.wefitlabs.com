@@ -1,6 +1,13 @@
 import React from 'react';
 import { Navigation } from './components/Navigation';
 import { HeroSection } from './components/HeroSection';
+import { MarketTractionSection } from './components/MarketTractionSection';
+import { BusinessModelSection } from './components/BusinessModelSection';
+import { InvestmentHighlightsSection } from './components/InvestmentHighlightsSection';
+import { TeamSection } from './components/TeamSection';
+import { FinancialsSection } from './components/FinancialsSection';
+import { InvestorResourcesSection } from './components/InvestorResourcesSection';
+import { SocialProofEnhancedSection } from './components/SocialProofEnhancedSection';
 import { DiscordSection } from './components/DiscordSection';
 import { FeaturesSection } from './components/FeaturesSection';
 import { TrackingSection } from './components/TrackingSection';
@@ -12,14 +19,26 @@ import { FAQSection } from './components/FAQSection';
 import { CTASection } from './components/CTASection';
 import { WaitlistSection } from './components/WaitlistSection';
 import { Footer } from './components/Footer';
+import { initializeInvestorFunnelTracking } from './utils/investorAnalytics';
 
 function App() {
+  React.useEffect(() => {
+    initializeInvestorFunnelTracking();
+  }, []);
+
   return (
     <div className="text-black text-xs not-italic normal-nums font-normal accent-auto bg-black box-border caret-transparent block tracking-[normal] leading-[normal] list-outside list-disc text-start indent-[0px] normal-case visible border-separate font-sans_serif">
       <div className="box-border caret-transparent">
         <div className="relative content-center items-center bg-black box-border caret-transparent gap-x-0 flex flex-col h-min justify-start min-h-[1000px] gap-y-0">
           <Navigation />
           <HeroSection />
+          <MarketTractionSection />
+          <BusinessModelSection />
+          <InvestmentHighlightsSection />
+          <TeamSection />
+          <FinancialsSection />
+          <InvestorResourcesSection />
+          <SocialProofEnhancedSection />
           <DiscordSection />
           <FeaturesSection />
           <TrackingSection />
