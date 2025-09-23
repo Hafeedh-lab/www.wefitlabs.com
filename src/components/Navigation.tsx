@@ -62,7 +62,7 @@ export function Navigation() {
             className="h-8 w-auto"
           />
         </a>
-        <ul className="flex items-center gap-4 overflow-x-auto text-xs md:gap-6 md:text-sm">
+        <ul className="flex flex-wrap items-center gap-6 text-xs md:gap-8 md:text-sm">
           {navigationLinks.map((link) => (
             <li key={link.id}>
               <a
