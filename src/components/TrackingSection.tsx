@@ -1,65 +1,118 @@
 import React from 'react';
+import wflImagePrimary from '../data/wfl 1.avif';
+import wflImageSecondary from '../data/wfl 2.avif';
 
 export function TrackingSection() {
+  const sectionRef = React.useRef<HTMLDivElement | null>(null);
+  const [progress, setProgress] = React.useState(0);
+
+  React.useEffect(() => {
+    let animationFrame = 0;
+
+    const updateProgress = () => {
+      animationFrame = 0;
+      if (!sectionRef.current) {
+        return;
+      }
+
+      const rect = sectionRef.current.getBoundingClientRect();
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+      const totalScrollableDistance = rect.height + viewportHeight;
+      const distanceIntoView = viewportHeight - rect.top;
+      const rawProgress = distanceIntoView / totalScrollableDistance;
+      const clampedProgress = Math.max(0, Math.min(1, rawProgress));
+
+      setProgress((previous) => {
+        if (Math.abs(previous - clampedProgress) < 0.01) {
+          return previous;
+        }
+        return clampedProgress;
+      });
+    };
+
+    const handleScroll = () => {
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
+      }
+      animationFrame = requestAnimationFrame(updateProgress);
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll);
+
+    return () => {
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
+      }
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, []);
+
+  const primaryImageStyle = React.useMemo<React.CSSProperties>(() => {
+    const translateY = 80 - progress * 80;
+    const scale = 0.9 + progress * 0.1;
+    const rotation = -6 + progress * 6;
+    const opacity = Math.min(1, 0.25 + progress * 0.75);
+
+    return {
+      transform: `translate3d(-50%, ${translateY}px, 0) scale(${scale}) rotate(${rotation}deg)`,
+      opacity,
+    };
+  }, [progress]);
+
+  const secondaryImageStyle = React.useMemo<React.CSSProperties>(() => {
+    const translateY = 160 - progress * 160;
+    const scale = 0.75 + progress * 0.25;
+    const rotation = 8 - progress * 8;
+    const opacity = Math.min(1, Math.max(0, progress - 0.1) * 1.2);
+
+    return {
+      transform: `translate3d(-50%, ${translateY}px, 0) scale(${scale}) rotate(${rotation}deg)`,
+      opacity,
+    };
+  }, [progress]);
+
   return (
-    <div className="relative content-center items-center bg-black box-border caret-transparent gap-x-2.5 flex flex-col shrink-0 h-min justify-center gap-y-2.5 w-full overflow-hidden py-14 md:flex-row md:pt-[42px] md:pb-[70px]">
-      <div className="relative content-center items-center box-border caret-transparent gap-x-[88px] flex basis-auto flex-col grow-0 shrink-0 h-min justify-center max-w-[1000px] gap-y-[88px] w-full px-5 md:gap-x-[117px] md:basis-0 md:grow md:gap-y-[117px] md:w-px md:px-0">
-        <div className="relative content-center items-center box-border caret-transparent gap-x-[45px] flex flex-col shrink-0 flex-wrap h-min justify-center gap-y-[45px] w-full md:gap-x-20 md:flex-row md:gap-y-20">
-          <div className="relative content-start items-start box-border caret-transparent gap-x-[15px] flex basis-auto flex-col grow-0 shrink-0 h-min justify-center gap-y-[15px] w-full md:basis-0 md:grow md:w-px">
-            <div className="relative box-border caret-transparent flex flex-col shrink-0 justify-start break-words w-[286px]">
-              <h2 className="text-white text-[13px] font-semibold box-border caret-transparent leading-[19.5px] break-words text-left font-unbounded">Track, Compete, & Achieve</h2>
-            </div>
-            <div className="box-content caret-black block md:aspect-auto md:box-border md:caret-transparent md:contents md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto]">
-              <div className="static box-content caret-black block flex-row shrink justify-normal min-h-0 min-w-0 w-auto break-normal md:relative md:aspect-auto md:box-border md:caret-transparent md:flex md:flex-col md:shrink-0 md:justify-start md:min-h-[auto] md:min-w-[auto] md:break-words md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:w-[459px] md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto]">
-                <h1 className="text-black text-[32px] font-bold box-content caret-black leading-[normal] min-h-0 min-w-0 text-start break-normal font-times md:text-white md:text-[35px] md:aspect-auto md:box-border md:caret-transparent md:leading-[42px] md:min-h-[auto] md:min-w-[auto] md:break-words md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:text-left md:decoration-auto md:underline-offset-auto md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto] md:font-unbounded">Track Your Progress With ease</h1>
-              </div>
-            </div>
-            <div className="relative box-border caret-transparent flex flex-col shrink-0 justify-start break-words w-full md:w-[462px]">
-              <p className="text-white text-sm box-border caret-transparent leading-6 break-words text-left font-unbounded">
-                Simply fitness tracking by integrating wearable devices and apps. Using AI, record workouts and meals. Whether walking, running, or working out, you can effortlessly stay on top of your fitness goals.
-              </p>
-            </div>
-            <div className="relative content-center items-center box-border caret-transparent gap-x-[15px] flex shrink-0 h-min justify-center gap-y-[15px] w-min">
-              <div className="box-content caret-black block md:aspect-auto md:box-border md:caret-transparent md:contents md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto]">
-                <div className="static box-content caret-black shrink h-auto min-h-0 min-w-0 md:relative md:aspect-auto md:box-border md:caret-transparent md:shrink-0 md:h-10 md:min-h-[auto] md:min-w-[auto] md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto]">
-                  <a href="./" className="static text-black [align-items:normal] bg-transparent box-content caret-black gap-x-[normal] inline h-auto justify-normal gap-y-[normal] w-auto rounded-none md:relative md:text-blue-700 md:content-center md:items-center md:aspect-auto md:bg-emerald-400 md:box-border md:caret-transparent md:gap-x-2.5 md:flex md:h-full md:justify-center md:overscroll-x-auto md:overscroll-y-auto md:gap-y-2.5 md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:w-[140px] md:overflow-hidden md:[mask-position:0%] md:bg-left-top md:p-[15px] md:scroll-m-0 md:scroll-p-[auto] md:rounded-[5px]">
-                    <div className="static box-content caret-black block flex-row shrink justify-normal min-h-0 min-w-0 text-wrap md:relative md:aspect-auto md:box-border md:caret-transparent md:flex md:flex-col md:shrink-0 md:justify-start md:min-h-[auto] md:min-w-[auto] md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:text-nowrap md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto]">
-                      <p className="text-black font-normal box-content caret-black leading-[normal] min-h-0 min-w-0 text-start text-wrap font-times md:font-semibold md:aspect-auto md:box-border md:caret-transparent md:leading-[14.4px] md:min-h-[auto] md:min-w-[auto] md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:text-center md:decoration-auto md:underline-offset-auto md:text-nowrap md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto] md:font-unbounded">Join Waitlist</p>
-                    </div>
-                    <div className="static box-content caret-black shrink h-auto transform-none w-auto z-auto right-auto bottom-auto md:absolute md:aspect-auto md:box-border md:caret-transparent md:shrink-0 md:h-[21px] md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:rotate-45 md:w-[21px] md:z-[1] md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto] md:right-2.5 md:-bottom-4">
-                      <div className="box-content caret-black block md:aspect-auto md:box-border md:caret-transparent md:contents md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto]">
-                        <img src="https://c.animaapp.com/mfqo4zaxsuDsQ0/assets/icon-2.svg" alt="Icon" className="text-black box-content caret-black block h-auto align-middle w-auto md:aspect-auto md:box-border md:caret-transparent md:inline md:h-full md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:align-baseline md:w-full md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto]" />
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
+    <section
+      ref={sectionRef}
+      className="relative flex w-full flex-col items-center justify-center overflow-hidden bg-black py-16 text-white md:py-20"
+    >
+      <div className="flex w-full max-w-6xl flex-col items-center gap-16 px-6 md:flex-row md:items-start md:justify-between md:gap-20 md:px-10">
+        <div className="flex w-full max-w-xl flex-col gap-5 text-left">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-300">Track, Compete, &amp; Achieve</p>
+          <h2 className="text-3xl font-bold text-white md:text-4xl">Track Your Progress With ease</h2>
+          <p className="text-base text-emerald-50/80">
+            Simply fitness tracking by integrating wearable devices and apps. Using AI, record workouts and meals. Whether walking,
+            running, or working out, you can effortlessly stay on top of your fitness goals.
+          </p>
+          <div>
+            <a
+              href="./"
+              className="inline-flex items-center justify-center rounded-md bg-emerald-400 px-6 py-3 text-sm font-semibold text-black shadow-[0_20px_40px_-20px_rgba(16,185,129,0.8)] transition-colors hover:bg-emerald-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-200"
+            >
+              Join Waitlist
+            </a>
           </div>
-          <div className="box-content caret-black block md:aspect-auto md:box-border md:caret-transparent md:contents md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto]">
-            <div className="static [align-items:normal] box-content caret-black gap-x-[normal] block basis-auto flex-row grow-0 shrink justify-normal min-h-0 min-w-0 gap-y-[normal] w-auto rounded-none md:relative md:content-center md:items-center md:aspect-[1.2_/_1] md:box-border md:caret-transparent md:gap-x-5 md:flex md:basis-0 md:flex-col md:grow md:shrink-0 md:justify-center md:min-h-[auto] md:min-w-[auto] md:overscroll-x-auto md:overscroll-y-auto md:gap-y-5 md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:w-px md:overflow-hidden md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto] md:rounded-[20px]">
-              <div className="static box-content caret-black rounded-none inset-auto md:absolute md:aspect-auto md:box-border md:caret-transparent md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto] md:rounded-[20px] md:inset-0">
-                <img 
-                  sizes="min(max(100vw, 1px), 1000px)" 
-                  src="https://c.animaapp.com/mfqo4zaxsuDsQ0/assets/VvnzagOA2M7W2cc4ivFmYM3ncQw.png" 
-                  alt="" 
-                  className="box-content caret-black h-auto object-fill object-[50%_50%] align-middle w-auto rounded-none md:aspect-[auto_848_/_400] md:box-border md:caret-transparent md:h-full md:object-contain md:object-[50%_100%] md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:align-baseline md:w-full md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto] md:rounded-[20px]" 
-                />
-              </div>
-              <div className="static box-content caret-black shrink h-auto opacity-100 transform-none w-auto z-auto left-auto top-auto md:absolute md:aspect-auto md:box-border md:caret-transparent md:shrink-0 md:h-[383px] md:left-[calc(50%_-_150px)] md:opacity-50 md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:top-[calc(50.3916%_-_191.5px)] md:translate-y-[295px] md:w-[300px] md:z-[1] md:overflow-hidden md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto]">
-                <div className="static box-content caret-black inset-auto md:absolute md:aspect-auto md:box-border md:caret-transparent md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto] md:inset-0">
-                  <img 
-                    sizes="300px" 
-                    src="https://c.animaapp.com/mfqo4zaxsuDsQ0/assets/ENz0FBU8EW5Uj7cc0WJZ2Qcbhs.png" 
-                    alt="Ios app image of wefit app" 
-                    className="box-content caret-black h-auto object-fill align-middle w-auto md:aspect-[auto_458_/_582] md:box-border md:caret-transparent md:h-full md:object-contain md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:align-baseline md:w-full md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto]" 
-                  />
-                </div>
-              </div>
+        </div>
+        <div className="relative flex w-full max-w-[420px] items-center justify-center md:w-1/2 md:justify-end">
+          <div className="relative h-[520px] w-full">
+            <div
+              className="absolute left-1/2 top-0 h-full w-full max-w-[420px] overflow-hidden rounded-[28px] bg-gradient-to-br from-emerald-500/20 via-emerald-400/10 to-transparent shadow-[0_40px_120px_-60px_rgba(16,185,129,0.6)] backdrop-blur-sm transition-[transform,opacity] duration-500 ease-out will-change-transform"
+              style={primaryImageStyle}
+            >
+              <img src={wflImagePrimary} alt="Wefit Labs progress tracking interface" className="h-full w-full object-cover" />
+            </div>
+            <div
+              className="absolute left-1/2 top-0 h-full w-full max-w-[360px] overflow-hidden rounded-[28px] bg-gradient-to-br from-emerald-400/30 via-emerald-300/10 to-transparent shadow-[0_40px_120px_-60px_rgba(20,184,166,0.6)] backdrop-blur-sm transition-[transform,opacity] duration-500 ease-out will-change-transform"
+              style={secondaryImageStyle}
+            >
+              <img src={wflImageSecondary} alt="Wefit Labs challenge tracking interface" className="h-full w-full object-cover" />
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
