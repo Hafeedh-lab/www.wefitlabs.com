@@ -62,13 +62,13 @@ export function Navigation() {
             className="h-8 w-auto"
           />
         </a>
-        <ul className="flex items-center gap-4 overflow-x-auto text-xs md:gap-6 md:text-sm">
+        <ul className="flex flex-wrap items-center gap-5 text-xs md:gap-7 md:text-sm">
           {navigationLinks.map((link) => (
             <li key={link.id}>
               <a
                 href={link.href}
                 onClick={(event) => handleNavClick(event, link.href)}
-                className="font-poppins font-medium text-white transition-colors duration-200 hover:text-emerald-400"
+                className="px-2 font-poppins font-medium text-white transition-colors duration-200 hover:text-emerald-400 md:px-3"
                 rel={isExternalLink(link.href) ? 'noreferrer noopener' : undefined}
                 target={isExternalLink(link.href) ? '_blank' : undefined}
               >
