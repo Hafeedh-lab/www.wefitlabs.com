@@ -3,7 +3,10 @@ import { socialProofImages } from '../data/socialProofData';
 
 export function WaitlistSection() {
   return (
-    <div className="relative content-center items-center bg-black box-border caret-transparent gap-x-2.5 flex shrink-0 h-min justify-center gap-y-2.5 w-full overflow-hidden">
+    <div
+      id="waitlist"
+      className="relative content-center items-center bg-black box-border caret-transparent gap-x-2.5 flex shrink-0 h-min justify-center gap-y-2.5 w-full overflow-hidden"
+    >
       <div className="box-content caret-black block md:aspect-auto md:box-border md:caret-transparent md:contents md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto]">
         <div className="static box-content caret-black shrink max-w-none min-h-0 min-w-0 w-auto md:relative md:aspect-auto md:box-border md:caret-transparent md:shrink-0 md:max-w-[1200px] md:min-h-[auto] md:min-w-[auto] md:overscroll-x-auto md:overscroll-y-auto md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:w-full md:[mask-position:0%] md:bg-left-top md:scroll-m-0 md:scroll-p-[auto]">
           <header className="static [align-items:normal] bg-transparent box-content caret-black gap-x-[normal] block flex-row h-auto justify-normal max-w-none gap-y-[normal] w-auto p-0 md:relative md:content-center md:items-center md:aspect-auto md:bg-black md:box-border md:caret-transparent md:gap-x-5 md:flex md:flex-col md:h-min md:justify-start md:max-w-full md:overscroll-x-auto md:overscroll-y-auto md:gap-y-5 md:snap-align-none md:snap-normal md:snap-none md:decoration-auto md:underline-offset-auto md:w-full md:overflow-hidden md:[mask-position:0%] md:bg-left-top md:pt-10 md:pb-9 md:px-10 md:scroll-m-0 md:scroll-p-[auto]">
